@@ -1,11 +1,14 @@
 package com.aluracursos.screenmatch;
 
+import com.aluracursos.screenmatch.model.DatosEpisodio;
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class ScreenmatchApplication implements CommandLineRunner {
@@ -26,5 +29,9 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		var datos = conversor.obtenerDatos(json, DatosSerie.class);
 
 		System.out.println(datos.toString());
+
+		json = consumoAPI.obtenerDatos("https://omdbapi.com/?apikey=8d725995&t=game+of+thrones&Season=1&episode=1");
+		DatosEpisodio episodio = conversor.obtenerDatos(json, DatosEpisodio.class);
+		System.out.println(episodio.toString());
 	}
 }
